@@ -1,0 +1,7 @@
+{
+    "name": "Always_Spin_Attack",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/LT-Schmiddy/zelda64recomp-automatic-release-test",
+    "description": "Always perform a quickspin when swinging your sword.",
+    "dependencies": []
+}

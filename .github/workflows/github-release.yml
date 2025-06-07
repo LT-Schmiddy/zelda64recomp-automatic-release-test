@@ -1,0 +1,43 @@
+name: Build and Publish mod
+on:
+  push:
+    tags:
+      - "release-*.*.*"
+  pull_request:
+    branches: [ "custom-main" ]
+jobs:
+  build:
+    outputs:
+      thunderstore-package: ${{ steps.create-thunderstore-package.outputs.artifact-id }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: Set up Clang
+      run: |-
+        sudo apt install -y clang lld ninja-build
+    - name: run-buildscript
+      run: |-
+        python3 ./create_thunderstore_package.py
+    - name: create-thunderstore-package
+      uses: actions/upload-artifact@v4
+      with:
+        name: ThunderstorePackage
+        path: |
+          ./thunderstore_package/*
+          
+    - name: publish-release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: ${{ github.ref }}
+        body_path: ${{ github.workspace }}/thunderstore_package/CHANGELOG.md
+        files: |
+          ${{ github.workspace }}/thunderstore_package/*.nrm
+          ${{ github.workspace }}/thunderstore_package/*.dll
+          ${{ github.workspace }}/thunderstore_package/*.dylib
+          ${{ github.workspace }}/thunderstore_package/*.so
+          ${{ github.workspace }}/*thunderstore.zip
+        make_latest: true
+    
