@@ -1,6 +1,6 @@
 {
     "name": "GitHub_Actions_Thunderstore_Release_Test",
-    "version_number": "1.0.2",
+    "version_number": "1.0.3",
     "website_url": "https://github.com/LT-Schmiddy/zelda64recomp-automatic-release-test",
     "description": "This was automatically published to Thunderstore by GitHub actions.",
     "dependencies": [
