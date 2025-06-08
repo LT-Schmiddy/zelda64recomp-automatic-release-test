@@ -64,8 +64,8 @@ jobs:
         echo "name=$NAME" >> "$GITHUB_OUTPUT"
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         echo "description=$DESCRIPTION" >> "$GITHUB_OUTPUT"
-        echo "namespace=${{ vars.THUNDERSTORE_TEAM }}
-        echo "namespace=${{ vars.THUNDERSTORE_TEAM }} >> "$GITHUB_OUTPUT"
+        echo "namespace=${{ vars.THUNDERSTORE_TEAM }}"
+        echo "namespace=${{ vars.THUNDERSTORE_TEAM }}" >> "$GITHUB_OUTPUT"
 
     - name: Publish Thunderstore Release
       id: publish_thunderstore_release
