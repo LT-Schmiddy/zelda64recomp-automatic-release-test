@@ -52,12 +52,12 @@ jobs:
 
     - name: Publish Thunderstore Release
       id: publish_thunderstore_release
-      # uses: GreenTF/upload-thunderstore-package@v4.3
-      uses: dhkatz/thunderstore-publish@v1
+      uses: GreenTF/upload-thunderstore-package@v4.3
       with:
+        repo: thunderstore.io
         token: ${{ secrets.THUNDERSTORE_SERVICE_TOKEN }}
         communities: zelda-64-recompiled
-        namespace: LT_Schmiddy # the thunderstore 'team' to publish under
+        community: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
         name: ${{ steps.read_thunderstore_manifest.outputs.name }} # the name of the package
         description: ${{ steps.read_thunderstore_manifest.outputs.description }}
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
