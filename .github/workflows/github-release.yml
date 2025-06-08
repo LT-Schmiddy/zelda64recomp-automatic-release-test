@@ -40,13 +40,20 @@ jobs:
         path: |
           ./thunderstore_package/*
 
-    # - name: Upload Workspace Directory
-    #   id: upload_workflow_directory
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: ThunderstorePackage
-    #     path: |
-    #       ${{ github.workspace }}/**
+    - name: Publish Github Release
+      id: publish_github_release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: ${{ github.ref_name }}
+        body_path: ./thunderstore_package/CHANGELOG.md
+        files: |
+          ./thunderstore_package/*.nrm
+          ./thunderstore_package/*.dll
+          ./thunderstore_package/*.dylib
+          ./thunderstore_package/*.so
+          ./*thunderstore.zip
+        make_latest: true
 
     - name: Read Thunderstore Manifest
       id: read_thunderstore_manifest
@@ -74,17 +81,4 @@ jobs:
           mods
         file: ./${{ steps.read_thunderstore_manifest.outputs.name }}.thunderstore.zip
 
-    - name: Publish Github Release
-      id: publish_github_release
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        name: ${{ github.ref_name }}
-        body_path: ${{ github.workspace }}/thunderstore_package/CHANGELOG.md
-        files: |
-          ${{ github.workspace }}/thunderstore_package/*.nrm
-          ${{ github.workspace }}/thunderstore_package/*.dll
-          ${{ github.workspace }}/thunderstore_package/*.dylib
-          ${{ github.workspace }}/thunderstore_package/*.so
-          ${{ github.workspace }}/*thunderstore.zip
-        make_latest: true
+    
