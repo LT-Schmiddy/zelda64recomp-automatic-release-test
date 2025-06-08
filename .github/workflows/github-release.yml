@@ -54,15 +54,15 @@ jobs:
       id: publish_thunderstore_release
       uses: GreenTF/upload-thunderstore-package@v4.3
       with:
-        namespace: LT_Schmiddy # the thunderstore 'team' to publish under
-        description: Test 
         token: ${{ secrets.THUNDERSTORE_SERVICE_TOKEN }}
-        name: test # the name of the package
-        version: ${{ github.ref_name }} 
         community: zelda-64-recompiled
-        categories: | # <-- notice this pipe character
-          foo
-          bar-baz
+        namespace: LT_Schmiddy # the thunderstore 'team' to publish under
+        name: ${{ steps.read_thunderstore_manifest.outputs.description }} # the name of the package
+        description: ${{ steps.read_thunderstore_manifest.outputs.description }}
+        version: ${{ steps.read_thunderstore_manifest.outputs.description }}
+        categories: | # valid categories are 'audio', 'misc', 'libraries', 'modpacks', and 'mods'.
+          mods
+        path: ${{ github.workspace }}/thunderstore_package/*
 
     - name: Publish Github Release
       id: publish_github_release
