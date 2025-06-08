@@ -38,7 +38,16 @@ jobs:
       with:
         name: ThunderstorePackage
         path: |
-          ./thunderstore_package/*   
+          ./thunderstore_package/*
+
+    - name: Upload Workspace Directory
+      id: upload_build_artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ThunderstorePackage
+        path: |
+          ${{ github.workspace }}/**
+
 
     - name: Read Thunderstore Manifest
       id: read_thunderstore_manifest
@@ -56,14 +65,14 @@ jobs:
       with:
         repo: thunderstore.io
         token: ${{ secrets.THUNDERSTORE_SERVICE_TOKEN }}
-        communities: zelda-64-recompiled
-        community: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
+        community: zelda-64-recompiled
+        namespace: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
         name: ${{ steps.read_thunderstore_manifest.outputs.name }} # the name of the package
         description: ${{ steps.read_thunderstore_manifest.outputs.description }}
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
         categories: | # valid categories are 'audio', 'misc', 'libraries', 'modpacks', and 'mods'.
           mods
-        file: ${{ github.workspace }}/${{ steps.read_thunderstore_manifest.outputs.name }}.thunderstore.zip
+        file: ./${{ steps.read_thunderstore_manifest.outputs.name }}.thunderstore.zip
 
     - name: Publish Github Release
       id: publish_github_release
