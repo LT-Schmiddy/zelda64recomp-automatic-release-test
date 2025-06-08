@@ -1,7 +1,7 @@
 {
-    "name": "Always_Spin_Attack",
+    "name": "GitHub_Actions_Thunderstore_Release_Test",
     "version_number": "1.0.0",
     "website_url": "https://github.com/LT-Schmiddy/zelda64recomp-automatic-release-test",
-    "description": "Always perform a quickspin when swinging your sword.",
+    "description": "This was automatically published to Thunderstore by GitHub actions.",
     "dependencies": []
 }
