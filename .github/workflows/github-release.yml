@@ -41,7 +41,7 @@ jobs:
           ./thunderstore_package/*
 
     - name: Upload Workspace Directory
-      id: upload_build_artifacts
+      id: upload_workflow_directory
       uses: actions/upload-artifact@v4
       with:
         name: ThunderstorePackage
