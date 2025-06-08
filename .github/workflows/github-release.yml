@@ -45,22 +45,6 @@ jobs:
         path: |
           ./thunderstore_package/*
 
-    # Remove this step if you don't want to publish to GitHub as well.
-    - name: Publish Github Release
-      id: publish_github_release
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        name: ${{ github.ref_name }}
-        body_path: ./thunderstore_package/CHANGELOG.md
-        files: |
-          ./thunderstore_package/*.nrm
-          ./thunderstore_package/*.dll
-          ./thunderstore_package/*.dylib
-          ./thunderstore_package/*.so
-          ./*thunderstore.zip
-        make_latest: true
-
     - name: Read Thunderstore Manifest
       id: read_thunderstore_manifest
       run: |
@@ -72,6 +56,23 @@ jobs:
         echo "description=$DESCRIPTION" >> "$GITHUB_OUTPUT"
         echo "namespace=${{ vars.THUNDERSTORE_TEAM }}"
         echo "namespace=${{ vars.THUNDERSTORE_TEAM }}" >> "$GITHUB_OUTPUT"
+
+    # Remove this step if you don't want to publish to GitHub as well.
+    - name: Publish Github Release
+      id: publish_github_release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: Release ${{ steps.read_thunderstore_manifest.outputs.version }}
+        body_path: ./thunderstore_package/CHANGELOG.md
+        files: |
+          ./thunderstore_package/*.nrm
+          ./thunderstore_package/*.dll
+          ./thunderstore_package/*.dylib
+          ./thunderstore_package/*.so
+          ./*thunderstore.zip
+        make_latest: true
+
 
     - name: Publish Thunderstore Release
       id: publish_thunderstore_release
