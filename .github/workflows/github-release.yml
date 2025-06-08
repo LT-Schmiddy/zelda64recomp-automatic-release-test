@@ -64,6 +64,8 @@ jobs:
         echo "name=$NAME" >> "$GITHUB_OUTPUT"
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         echo "description=$DESCRIPTION" >> "$GITHUB_OUTPUT"
+        echo "namespace=${{ vars.THUNDERSTORE_TEAM }}
+        echo "namespace=${{ vars.THUNDERSTORE_TEAM }} >> "$GITHUB_OUTPUT"
 
     - name: Publish Thunderstore Release
       id: publish_thunderstore_release
@@ -73,7 +75,8 @@ jobs:
         token: ${{ secrets.THUNDERSTORE_SERVICE_TOKEN }}
         community: zelda-64-recompiled
         # namespace: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
-        namespace: LT_Schmiddy # the thunderstore 'team' to publish under
+        # namespace: LT_Schmiddy # the thunderstore 'team' to publish under
+        namespace: ${{ steps.read_thunderstore_manifest.outputs.namespace }} # the thunderstore 'team' to publish under
         name: ${{ steps.read_thunderstore_manifest.outputs.name }} # the name of the package
         description: ${{ steps.read_thunderstore_manifest.outputs.description }}
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
