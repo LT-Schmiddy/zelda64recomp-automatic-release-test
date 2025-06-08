@@ -40,14 +40,13 @@ jobs:
         path: |
           ./thunderstore_package/*
 
-    - name: Upload Workspace Directory
-      id: upload_workflow_directory
-      uses: actions/upload-artifact@v4
-      with:
-        name: ThunderstorePackage
-        path: |
-          ${{ github.workspace }}/**
-
+    # - name: Upload Workspace Directory
+    #   id: upload_workflow_directory
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ThunderstorePackage
+    #     path: |
+    #       ${{ github.workspace }}/**
 
     - name: Read Thunderstore Manifest
       id: read_thunderstore_manifest
