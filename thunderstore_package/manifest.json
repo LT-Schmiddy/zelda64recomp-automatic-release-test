@@ -3,5 +3,7 @@
     "version_number": "1.0.0",
     "website_url": "https://github.com/LT-Schmiddy/zelda64recomp-automatic-release-test",
     "description": "This was automatically published to Thunderstore by GitHub actions.",
-    "dependencies": []
+    "dependencies": [
+        "ProxyMM-KV-0.0.5"
+    ]
 }
