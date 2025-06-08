@@ -74,9 +74,9 @@ jobs:
         repo: thunderstore.io
         token: ${{ secrets.THUNDERSTORE_SERVICE_TOKEN }}
         community: zelda-64-recompiled
-        # namespace: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
+        namespace: ${{ vars.THUNDERSTORE_TEAM }} # the thunderstore 'team' to publish under
         # namespace: LT_Schmiddy # the thunderstore 'team' to publish under
-        namespace: ${{ steps.read_thunderstore_manifest.outputs.namespace }} # the thunderstore 'team' to publish under
+        # namespace: ${{ steps.read_thunderstore_manifest.outputs.namespace }} # the thunderstore 'team' to publish under
         name: ${{ steps.read_thunderstore_manifest.outputs.name }} # the name of the package
         description: ${{ steps.read_thunderstore_manifest.outputs.description }}
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
